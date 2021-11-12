@@ -1,3 +1,4 @@
+
 podTemplate(containers: [
     containerTemplate(
         name: 'terraform', 
@@ -6,11 +7,11 @@ podTemplate(containers: [
   ]) {
 
     node(POD_LABEL) {
-        stage('Get TF') {
+        stage('Get TF from Repo') {
             container('terraform') {
                 stage('Shell Execution') {
                     sh '''
-                    git clone https://github.com/jecausey/ec2.git
+                    git clone "
                     '''
                 }
             }
