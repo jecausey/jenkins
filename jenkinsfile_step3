@@ -20,9 +20,7 @@ podTemplate(containers: [
         stage('TF init') {
             container('terraform') {
                 stage('Shell Execution') {
-                    sh '''
-                    terraform init
-                    '''
+                    sh "cd ${WORKSPACE}; terraform init"
                 }
             }
         }
