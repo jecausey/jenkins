@@ -12,7 +12,7 @@ podTemplate(containers: [
             container('terraform') {
                 stage('Shell Execution') {
                     sh '''
-                    git clone https://github.com/jecausey/ec2.git /tmp/
+                    git clone https://github.com/jecausey/ec2.git /tmp/git/
                     '''
                 }
             }
@@ -20,7 +20,7 @@ podTemplate(containers: [
         stage('TF init') {
             container('terraform') {
                 stage('Shell Execution') {
-                    sh "cd /tmp ; terraform init"
+                    sh "cd /tmp/git ; terraform init"
                 }
             }
         }
