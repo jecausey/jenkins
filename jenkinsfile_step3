@@ -1,0 +1,28 @@
+podTemplate(containers: [
+    containerTemplate(
+        name: 'terraform', 
+        image: 'hashicorp/terraform',
+        command: 'sleep' ,
+        args: '30d'
+        )
+  ]) {
+
+    node(POD_LABEL) {
+        stage('Get TF') {
+            container('terraform') {
+                stage('Shell Execution') {
+                    sh '''
+                    git clone https://github.com/jecausey/ec2.git
+                    '''
+                }
+            }
+        }
+        stage('TF init') {
+            container('terraform') {
+                stage('Shell Execution') {
+                    sh '''
+                    terraform init
+                    '''
+
+    }
+}
