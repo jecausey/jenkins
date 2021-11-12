@@ -23,6 +23,9 @@ podTemplate(containers: [
                     sh '''
                     terraform init
                     '''
+                }
+            }
+        }
 
     }
 }
