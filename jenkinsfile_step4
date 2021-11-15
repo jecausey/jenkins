@@ -14,7 +14,7 @@ podTemplate(containers: [
                 }
             }
         }
-    }
+    
         stage('TF init') {
             container('terraform') {
                 stage('Shell Execution') {
