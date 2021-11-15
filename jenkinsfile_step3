@@ -4,6 +4,9 @@ podTemplate(containers: [
         image: 'hashicorp/terraform',
         command: 'sleep' ,
         args: '30d'
+        environment {
+            AWS_DEFAULT_REGION="us-east-2"
+        }
         )
   ]) {
 
