@@ -25,7 +25,6 @@ podTemplate(containers: [
             }
         }
         stage('TF plan') {
-            log.stage()
             container('terraform') {
                 stage('Shell Execution') {
                     sh "cd /tmp/git ; terraform plan -out=tfplan"
