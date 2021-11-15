@@ -24,6 +24,12 @@ podTemplate(containers: [
                 }
             }
         }
-
+        stage('TF plan') {
+            container('terraform') {
+                stage('Shell Execution') {
+                    sh "cd /tmp/git ; terraform plan -out=tfplan"
+                }
+            }
+        }
     }
 }
