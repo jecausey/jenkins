@@ -26,12 +26,13 @@ podTemplate(containers: [
         }
         stage('TF plan') {
             container('terraform') 
-            withCredentials([[
+            { withCredentials([[
                         $class: 'AmazonWebServicesCredentialsBinding', 
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
                         credentialsId: '${AWS_ACCOUNT}'
                      ]])
+            }
                {
                 stage('Shell Execution') {
                     sh "cd /tmp/git ; terraform plan -out=tfplan"
