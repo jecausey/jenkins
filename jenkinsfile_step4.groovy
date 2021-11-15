@@ -23,10 +23,6 @@ podTemplate(containers: [
             }
         }
         stage('TF plan') {
-            environment {
-                 AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
-                 AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        }
             container('terraform') {
                 stage('Shell Execution') {
                     sh "cd /tmp/git ; terraform plan -out=tfplan"
