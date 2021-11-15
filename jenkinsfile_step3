@@ -20,18 +20,19 @@ podTemplate(containers: [
         stage('TF init') {
             container('terraform') {
                 stage('Shell Execution') {
-                  withCredentials([[
-                        $class: 'AmazonWebServicesCredentialsBinding', 
-                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
-                        credentialsId: '${AWS_ACCOUNT}'
-                     ]])
                     sh "cd /tmp/git ; terraform init"
                 }
             }
         }
         stage('TF plan') {
-            container('terraform') {
+            container('terraform') 
+            withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding', 
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                        credentialsId: '${AWS_ACCOUNT}'
+                     ]])
+               {
                 stage('Shell Execution') {
                     sh "cd /tmp/git ; terraform plan -out=tfplan"
                 }
