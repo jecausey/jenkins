@@ -36,5 +36,16 @@ podTemplate(containers: [
             }
         }
     }
+        stage('TF Apply') {
+            container('terraform')
+               {
+                stage('Shell Execution') {
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'terraform_admin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])
+                    {
+                    sh 'cd /tmp/git ; terraform apply -auto-approve "tfplan"'
+                }
+            }
+        }
+    }
 }
 }
