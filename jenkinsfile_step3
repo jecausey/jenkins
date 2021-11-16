@@ -29,7 +29,7 @@ podTemplate(containers: [
             container('terraform')
                {
                 stage('Shell Execution') {
-                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsID: 'terraform_admin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])
                     {
                     sh "cd /tmp/git ; terraform plan -out=tfplan"
                 }
