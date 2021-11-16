@@ -21,10 +21,13 @@ podTemplate(containers: [
         stage('TF init') {
             container('terraform') {
                 stage('Shell Execution') {
-                    sh "cd /tmp/git ; terraform init"
+                    withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'terraform_admin', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY')])
+                    {
+                    sh "cd /tmp/git ; terraform init -backend-config="access_key=$AWS_SECRET_ACCESS_KEY" --backend=config="secret_key=$AWS_SECRET_ACCESS_KEY"
                 }
             }
         }
+    }
         stage('TF plan') {
             container('terraform')
                {
